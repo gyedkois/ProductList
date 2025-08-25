@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ProductListApp.Models.Product>
+
+@{
+    ViewData["Title"] = "Product Catalog";
+}
+
+<h1>Product Catalog</h1>
+
+<p>
+    @* Tag Helper for Navigation: 'anchor' Tag Helper *@
+    <a asp-controller="Home" asp-action="Privacy" class="btn btn-secondary">View Privacy Policy (Tag Helper Navigation)</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Price)</th>
+            <th>@Html.DisplayNameFor(model => model.Description)</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>
+                    @* Tag Helper for Form Post: 'form' Tag Helper *@
+                    <form asp-controller="Product" asp-action="Buy" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="btn btn-success btn-sm">Buy Now</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
